@@ -10,7 +10,7 @@ export default function Cadastro({ products }) {
 
   const ApagaProduto = (id) => {
     axios
-      .delete(`https://listadeprodutos.herokuapp.com/${id}`)
+      .delete(process.env.REACT_APP_API_URL + id)
       .then((res) => {
         alert('O produto foi deletado com sucesso');
         window.location.reload();

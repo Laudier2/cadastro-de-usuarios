@@ -10,7 +10,7 @@ function App() {
   useEffect(() => {
     const GetReq = async () => {
       
-      const req = await Axios.get('https://listadeprodutos.herokuapp.com/')
+      const req = await Axios.get(process.env.REACT_APP_API_URL)
       const res = await req.data;
 
       console.clear()
@@ -20,10 +20,6 @@ function App() {
 
     GetReq()
   }, [])
-
-  useEffect(() => {
-    console.log(process.env.REACT_APP_API_URL);
-  }, []);
 
   return (
     <>

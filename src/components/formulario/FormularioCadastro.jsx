@@ -38,7 +38,7 @@ export default function FormularioCadastro(props) {
      */
 
     axios
-      .post('https://listadeprodutos.herokuapp.com/', values)
+      .post(process.env.REACT_APP_API_URL, values)
       .then((res) => {
         alert('O produto foi Criado com sucesso');
         history.push('/', window.location.reload());
