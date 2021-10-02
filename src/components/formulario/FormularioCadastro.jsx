@@ -135,7 +135,7 @@ export default function FormularioCadastro(props) {
         <input
           type="text"
           className="form-control"
-          placeholder="Imagem"
+          placeholder="Url de uma Imagem"
           name="image1"
           value={values.image1}
           onChange={onChange}
