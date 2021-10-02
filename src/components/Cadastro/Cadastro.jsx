@@ -64,7 +64,7 @@ export default function Cadastro({ products }) {
                   <td>{r.peso}</td>
                   <td>{r.quantity}</td>
                   <td>
-                    <img src={r.image1} alt="Erro na img" className="col-5" />
+                    <img src={r.image1} alt="Erro na img" className="img" />
                     <Link
                       to="/"
                       onClick={() => {

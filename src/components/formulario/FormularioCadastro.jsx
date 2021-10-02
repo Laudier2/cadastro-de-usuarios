@@ -21,26 +21,30 @@ export default function FormularioCadastro(props) {
   };
 
   useEffect(() => {
-    if (props.idAtual === '') {
-      setValues({ ...camposIniciasDeValores });
-      //console.log({ ...camposIniciasDeValores });
-    } else {
-      console.log({ ...props.products[props.idAtual] });
-      setValues({ ...props.products[props.idAtual] });
+    if (props.idAtual) {
+      axios
+        .get(`${process.env.REACT_APP_API_URL}admin/${props.idAtual}`)
+        .then((res) => {
+          setValues(res.data);
+        });
     }
-  }, [props.idAtual, props.products]);
+  }, [props.idAtual]);
 
   function onSubmit(ev) {
     ev.preventDefault();
 
-    /**
-     * https://listadeprodutos.herokuapp.com/
-     */
+    const method = props.idAtual ? 'put' : 'post';
+    const url = props.idAtual
+      ? `${process.env.REACT_APP_API_URL}${props.idAtual}`
+      : `${process.env.REACT_APP_API_URL}`;
 
-    axios
-      .post(process.env.REACT_APP_API_URL, values)
+    axios[method](url, values)
       .then((res) => {
-        alert('O produto foi Criado com sucesso');
+        if (props.idAtual === '') {
+          alert('O produto foi Criado com sucesso');
+        } else {
+          alert('O produto foi Atualizado com sucesso');
+        }
         history.push('/', window.location.reload());
       })
       .catch((erro) => {
@@ -59,7 +63,7 @@ export default function FormularioCadastro(props) {
       <div className="form-group input-group">
         <div className="input-grou-prepend align-self-center">
           <div className="input-group-text">
-            <i className="fas fa-file-signature  mt-2 text-info" />
+            <i className="fas fa-file-signature p-1 mt-2 text-info" />
           </div>
         </div>
         <input
@@ -74,7 +78,7 @@ export default function FormularioCadastro(props) {
       <div className="form-group input-group">
         <div className="input-grou-prepend align-self-center">
           <div className="input-group-text">
-            <i className="fas fa-file-invoice-dollar mt-2 text-info" />
+            <i className="fas fa-file-invoice-dollar p-2 text-info" />
           </div>
         </div>
         <input
@@ -92,7 +96,7 @@ export default function FormularioCadastro(props) {
       <div className="form-group input-group">
         <div className="input-grou-prepend align-self-center">
           <div className="input-group-text">
-            <i className="fas fa-file-signature  mt-2 text-info" />
+            <i className="fas fa-file-signature  p-1 mt-2 text-info" />
           </div>
         </div>
         <input
@@ -109,7 +113,7 @@ export default function FormularioCadastro(props) {
       <div className="form-group input-group">
         <div className="input-grou-prepend align-self-center">
           <div className="input-group-text">
-            <i className="fas fa-file-signature  mt-2 text-info" />
+            <i className="fas fa-file-signature  p-1 mt-2 text-info" />
           </div>
         </div>
         <input
@@ -125,7 +129,7 @@ export default function FormularioCadastro(props) {
       <div className="form-group input-group">
         <div className="input-grou-prepend align-self-center">
           <div className="input-group-text">
-            <i className="fas fa-file-image mt-2 text-info" />
+            <i className="fas fa-file-image p-2 text-info" />
           </div>
         </div>
         <input
