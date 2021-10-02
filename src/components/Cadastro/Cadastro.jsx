@@ -26,9 +26,11 @@ export default function Cadastro({ products }) {
 
   return (
     <div>
-      <div className="jumbotron jumbotron-fuid">
+      <div className="jumbotron jumbotron-fuid bg-img">
         <conatiner>
-          <h1 className="h1">Cadastro e gerenciamento de produtos</h1>
+          <h1 className="h5 col-md-5">
+            Sistema de Cadastro e Gerenciamento de Produtos
+          </h1>
         </conatiner>
       </div>
 

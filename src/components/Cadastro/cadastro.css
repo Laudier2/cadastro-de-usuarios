@@ -21,5 +21,9 @@
   width: 30px;
 }
 
+.bg-img {
+  background-image: url('https://image.freepik.com/fotos-gratis/jovem-que-trabalha-em-um-armazem-com-caixas_1303-16604.jpg');
+}
+
 @media screen and (max-width: 780px) {
 }
