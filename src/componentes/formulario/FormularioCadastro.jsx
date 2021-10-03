@@ -19,6 +19,13 @@ export default function FormularioCadastro(props) {
 
     setValues({ ...values, [name]: value });
   };
+  
+  usarffect (() => {
+       function Res(){
+  const res = (props.idAtual == '' ? '' : window.scrollTo(0, 0))
+}
+    Res()
+   }, []
 
   useEffect(() => {
     if (props.idAtual) {
