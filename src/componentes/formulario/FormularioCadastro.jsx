@@ -21,11 +21,12 @@ export default function FormularioCadastro(props) {
   };
   
   usarffect (() => {
-       function Res(){
-  const res = (props.idAtual == '' ? '' : window.scrollTo(0, 0))
-}
-    Res()
-   }, []
+     function Res(){
+        const res = (props.idAtual == '' ? '' : window.scrollTo(0, 0))
+        return res;
+     }
+     Res()
+  }, []
 
   useEffect(() => {
     if (props.idAtual) {
