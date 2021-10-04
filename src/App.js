@@ -6,16 +6,16 @@ import { Route } from "react-router-dom";
 function App() {
 
   /**
-   * Aqui estou usando o useState para guarda o estado ou melhor dizendo os valores
-   * da requizição via axios, para que assim eu possa usar aqui ou em outro componente via props
+   * Aqui estou usando o useState para guarda o estado, ou melhor dizendo os valores.
+   * Que iremos receber da requisição via axios, para que assim eu possa usar aqui ou em outro componente via props 
    */
   const [ product, setProduct ] = useState([])
 
-  /**
-   * Aqui abaixo esto usando um hook do react que o useEffect para uma função acincrona
-   * e detro desta função estou utilizando o axios para fazer uma requisição get
-   * para lista os produtos na tela.
-   */
+ /**
+  * Aqui abaixo esto usando um hook do react que o useEffect para uma função asincrona
+  * e dentro desta função estou utilizando o axios para fazer uma requisição get,
+  * e assim listarmos os produtos na tela.
+  */
   useEffect(() => {
     const GetReq = async () => {
       
@@ -31,8 +31,8 @@ function App() {
   }, [])
 
   /**
-   * E enfim o return para retorna os valores ou nesse caso um componente que esta 
-   * recebendo essa propriedade do useState cidada logo acima
+   * E enfim o return para retorna os valores ou nesse caso um componente que esta! 
+   * Recebendo essa propriedade do useState que esta logo acima.
    */
 
 

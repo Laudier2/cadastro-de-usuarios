@@ -6,15 +6,16 @@ import { Link } from 'react-router-dom';
 
 export default function Cadastro({ products }) {
   /**
-   * Esse hook useState esta recebendo o valor do evento onClick e aasim eu
-   * passo como parametro para o componente FormularioCadastro para que assim
-   * possamos preecher os campos imput e atualizalo com indentificação via id
+   * Esse hook useState esta recebendo o valor do evento onClick e assim
+   * passo como parâmetro para o componente FormularioCadastro para que assim
+   * possamos preencher os campos imput e atualizá-lo com identificação via id
+   *
    */
   const [idAtual, setIdAtual] = useState('');
 
   /**
-   * Essa função é responsavel por apaga um produto via id,
-   * que esta vindo via envento do onClick
+   * Essa função é responsável por apaga um produto via id,
+   * que esta vindo via evento do onClick
    */
   const ApagaProduto = (id) => {
     axios //Esse process.env.REACT_APP_API_URL é uma variave de ambiente que contem a url da api
