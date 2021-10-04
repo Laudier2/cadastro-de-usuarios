@@ -24,11 +24,23 @@ export default function FormularioCadastro(props) {
 
     setValues({ ...values, [name]: value });
   };
+<<<<<<< HEAD:src/components/formulario/FormularioCadastro.jsx
   /**
    * Aqui estamos fazendo uma espesse de filtragem do produto via id via props,
    * lembra da variavel que eviamos para ca via props a idAtual, entao é ela que
    * estamos usando, porque ela traz o id de um produto
    */
+=======
+  
+  usarffect (() => {
+     function Res(){
+        const res = (props.idAtual == '' ? '' : window.scrollTo(0, 0))
+        return res;
+     }
+     Res()
+  }, []
+
+>>>>>>> ddb35c716aa8c566b358b3d62621d57dcc168198:src/componentes/formulario/FormularioCadastro.jsx
   useEffect(() => {
     if (props.idAtual) {
       axios
