@@ -14,12 +14,21 @@ export default function FormularioCadastro(props) {
   const [values, setValues] = useState(camposIniciasDeValores);
   const history = useHistory();
 
+  /**
+   * Aqui estamo utilizando o onChange para verifica tudo que esta sendo digitado
+   * nos input via name, e passando todo esses valores para avariavel do nosso useState
+   * o values e assim podemos criar o na nossa base de dados via axios como vamos ver abaixo.
+   */
   const onChange = (ev) => {
     const { name, value } = ev.target;
 
     setValues({ ...values, [name]: value });
   };
-
+  /**
+   * Aqui estamos fazendo uma espesse de filtragem do produto via id via props,
+   * lembra da variavel que eviamos para ca via props a idAtual, entao é ela que
+   * estamos usando, porque ela traz o id de um produto
+   */
   useEffect(() => {
     if (props.idAtual) {
       axios
@@ -29,15 +38,30 @@ export default function FormularioCadastro(props) {
         });
     }
   }, [props.idAtual]);
-
+  /**
+   * E aqui que fazemos a criação e e edidação do produto
+   */
   function onSubmit(ev) {
+    /**
+     * Esse ev.preventDefault() é para evitar que o botão fassa a
+     * ação natural dele que é da um refresh, e ai podemos determina para
+     * onde a pagina seje redirecionada com o useHistory do react-router-dom
+     */
     ev.preventDefault();
 
+    /**
+     * Agora estamos criando uma variavel method com uma condição
+     * se a requisição for put, vai ser execultada put, se não ezecute post
+     */
     const method = props.idAtual ? 'put' : 'post';
     const url = props.idAtual
       ? `${process.env.REACT_APP_API_URL}${props.idAtual}`
       : `${process.env.REACT_APP_API_URL}`;
 
+    /**
+     * E o que for resolvido na condição de cima vai ser execultado aqui
+     * seja para criar um produto ou para atualizar
+     */
     axios[method](url, values)
       .then((res) => {
         if (props.idAtual === '') {
