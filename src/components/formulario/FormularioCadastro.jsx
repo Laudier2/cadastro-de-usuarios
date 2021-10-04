@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+/**
+ * Essa variável é quem determina os valores iniciais dos input citado no values do useState
+ */
 const camposIniciasDeValores = {
   name: '',
   price: '',
