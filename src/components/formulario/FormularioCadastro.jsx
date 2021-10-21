@@ -7,10 +7,16 @@ import { useHistory } from 'react-router-dom';
  */
 const camposIniciasDeValores = {
   name: '',
-  price: '',
-  image1: '',
-  peso: '',
-  quantity: '',
+  sobrenome: '',
+  email: '',
+  password: '',
+  phone: '',
+  cep: '',
+  endereco1: '',
+  endereco2: '',
+  nacimento: '',
+  cpf: '',
+  rendMensal: '',
 };
 
 export default function FormularioCadastro(props) {
@@ -76,7 +82,7 @@ export default function FormularioCadastro(props) {
       })
       .catch((erro) => {
         alert(
-          'Houve um erro ao tenta apaga esse produto, erro relacionado a ' +
+          'Houve um erro ao tenta criar esse usuario, erro relacionado a ' +
             erro
         );
 
@@ -89,13 +95,13 @@ export default function FormularioCadastro(props) {
       <div className="form-group input-group">
         <div className="input-grou-prepend align-self-center">
           <div className="input-group-text">
-            <i className="fas fa-file-signature p-1 mt-2 text-info" />
+            <i className="fas fa-id-badge p-1 mt-2 text-info" />
           </div>
         </div>
         <input
           type="text"
           className="form-control"
-          placeholder="Nome do produto"
+          placeholder="Seu Nome"
           name="name"
           value={values.name}
           onChange={onChange}
@@ -104,18 +110,121 @@ export default function FormularioCadastro(props) {
       <div className="form-group input-group">
         <div className="input-grou-prepend align-self-center">
           <div className="input-group-text">
-            <i className="fas fa-file-invoice-dollar p-2 text-info" />
+            <i className="fas fa-id-badge p-1 mt-2 text-info" />
           </div>
         </div>
         <input
-          type="number"
+          type="text"
           className="form-control"
-          placeholder="Preco ex: 1,00"
-          pattern="[0-9]+([,\.][0-9]+)?"
+          placeholder="Sobrenome"
+          name="sobrenome"
+          value={values.sobrenome}
+          onChange={onChange}
+        />
+      </div>
+      <div className="form-group input-group">
+        <div className="input-grou-prepend align-self-center">
+          <div className="input-group-text">
+            <i className="fas fa-envelope  p-1 mt-2 text-info" />
+          </div>
+        </div>
+        <input
+          type="email"
+          className="form-control"
+          placeholder="E-mail"
+          name="email"
+          value={values.email}
+          onChange={onChange}
+        />
+      </div>
+      <div className="form-group input-group">
+        <div className="input-grou-prepend align-self-center">
+          <div className="input-group-text">
+            <i className="fas fa-envelope  p-1 mt-2 text-info" />
+          </div>
+        </div>
+        <input
+          type="password"
+          className="form-control"
+          placeholder="Senha"
+          name="password"
+          value={values.password}
+          onChange={onChange}
+        />
+      </div>
+      <div className="form-group input-group">
+        <div className="input-grou-prepend align-self-center">
+          <div className="input-group-text">
+            <i className="fas fa-phone-alt  p-1 mt-2 text-info" />
+          </div>
+        </div>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Telefone"
           min="0"
-          step="any"
-          name="price"
-          value={values.price}
+          name="phone"
+          value={values.phone}
+          onChange={onChange}
+        />
+      </div>
+      <div className="form-group input-group">
+        <div className="input-grou-prepend align-self-center">
+          <div className="input-group-text">
+            <i className="fas fa-shipping-fast p-1 mt-2 text-info" />
+          </div>
+        </div>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="CEP"
+          name="cep"
+          value={values.cep}
+          onChange={onChange}
+        />
+      </div>
+      <div className="form-group input-group">
+        <div className="input-grou-prepend align-self-center">
+          <div className="input-group-text">
+            <i className="fas fa-shipping-fast p-1 mt-2 text-info" />
+          </div>
+        </div>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Endereco1"
+          name="endereco1"
+          value={values.endereco1}
+          onChange={onChange}
+        />
+      </div>
+      <div className="form-group input-group">
+        <div className="input-grou-prepend align-self-center">
+          <div className="input-group-text">
+            <i className="fas fa-shipping-fast p-1 mt-2 text-info" />
+          </div>
+        </div>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Endereco2"
+          name="endereco2"
+          value={values.endereco2}
+          onChange={onChange}
+        />
+      </div>
+      <div className="form-group input-group">
+        <div className="input-grou-prepend align-self-center">
+          <div className="input-group-text">
+            <i className="fas fa-calendar p-2 text-info" />
+          </div>
+        </div>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Idade ex: 01/01/2000"
+          name="nacimento"
+          value={values.nacimento}
           onChange={onChange}
         />
       </div>
@@ -128,49 +237,31 @@ export default function FormularioCadastro(props) {
         <input
           type="text"
           className="form-control"
-          placeholder="Quantas ex: 1"
-          pattern="[0-9]+([,\.][0-9]+)?"
-          min="0"
-          name="quantity"
-          value={values.quantity}
+          placeholder="CPF"
+          name="cpf"
+          value={values.cpf}
           onChange={onChange}
         />
       </div>
       <div className="form-group input-group">
         <div className="input-grou-prepend align-self-center">
           <div className="input-group-text">
-            <i className="fas fa-file-signature  p-1 mt-2 text-info" />
+            <i className="fas fas fa-wallet p-2 text-info" />
           </div>
         </div>
         <input
           type="text"
           className="form-control"
-          placeholder="Quantos Quilos ex: 1 kg"
-          min="0"
-          name="peso"
-          value={values.peso}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-file-image p-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Url de uma Imagem"
-          name="image1"
-          value={values.image1}
+          placeholder="Renda mensal"
+          name="rendaMes"
+          value={values.rendaMes}
           onChange={onChange}
         />
       </div>
       <input
         type="submit"
         value={props.idAtual === '' ? 'Salvar' : 'Atualizar'}
-        className="btn btn-primary btn-block"
+        className="btn btn-primary btn-block mb-5"
       />
     </form>
   );

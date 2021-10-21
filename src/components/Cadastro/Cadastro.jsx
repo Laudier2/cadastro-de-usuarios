@@ -3,8 +3,9 @@ import FormularioCadastro from '../formulario/FormularioCadastro';
 import './cadastro.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Modal from '../modal/Modal';
 
-export default function Cadastro({ products }) {
+export default function Cadastro({ users }) {
   /**
    * Esse hook useState esta recebendo o valor do evento onClick e assim
    * passo como parâmetro para o componente FormularioCadastro para que assim
@@ -12,21 +13,22 @@ export default function Cadastro({ products }) {
    *
    */
   const [idAtual, setIdAtual] = useState('');
+  const [pega, setPega] = useState('');
 
   /**
-   * Essa função é responsável por apaga um produto via id,
+   * Essa função é responsável por apaga um usuario via id,
    * que esta vindo via evento do onClick
    */
-  const ApagaProduto = (id) => {
+  const Apagausuario = (id) => {
     axios //Esse process.env.REACT_APP_API_URL é uma variave de ambiente que contem a url da api
       .delete(process.env.REACT_APP_API_URL + id)
       .then((res) => {
-        alert('O produto foi deletado com sucesso');
+        alert('O usuário foi deletado com sucesso');
         window.location.reload();
       })
       .catch((erro) => {
         alert(
-          'Houve um erro ao tenta apaga esse produto, erro relacionado a ' +
+          'Houve um erro ao tenta apaga esse usuário, erro relacionado a ' +
             erro
         );
         window.location.reload();
@@ -35,47 +37,91 @@ export default function Cadastro({ products }) {
 
   return (
     <div>
-      <div className="jumbotron jumbotron-fuid bg-img">
-        <conatiner>
-          <h1 className="h5 col-md-5">
-            Sistema de Cadastro e Gerenciamento de Produtos
-          </h1>
-        </conatiner>
-      </div>
+      <section>
+        <h1 className="h5 col-md-12 mrg titolo text-white">
+          Sistema de Cadastro e Gerenciamento de Usuários
+        </h1>
+      </section>
+      <div className="jumbotron jumbotron-fuid bg-img mt-5"></div>
 
       <div className="row">
         <div className="col-md-5">
-          <FormularioCadastro {...{ idAtual, products }} />
+          <FormularioCadastro {...{ idAtual, users }} />
         </div>
-        <div className="col-md-7">
-          <h2>Lista de Clientes</h2>
+        <div className="col-md-7 ">
+          <h2 className="titolo mx-auto">Lista de Usuários</h2>
           <table class="table">
             <thead>
-              <tr>
+              <tr className="text-white">
                 <th scope="col">
-                  <i className="fab fa-shopify" />
+                  <i className="fas fa-coins" />
                 </th>
-                <th scope="col">Nome</th>
-                <th scope="col">Price</th>
-                <th scope="col">Peso kilos</th>
-                <th scope="col">Qtn</th>
-                <th scope="col">Image</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">E-mail</th>
               </tr>
             </thead>
 
-            {products.map((r) => (
+            {users.map((r) => (
               <tbody key={r.id}>
-                <tr>
+                <tr className="btn-outline-secondary text-white">
                   <th scope="row">
-                    <i className="fas fa-eye" />
-                  </th>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      onClick={() => {
+                        setPega(r);
+                      }}
+                    >
+                      <i className="fas fa-eye" />
+                    </button>
 
-                  <td>{r.name}</td>
-                  <td>R$ {r.price},00</td>
-                  <td>{r.peso}</td>
-                  <td>{r.quantity}</td>
+                    <div
+                      class="modal fade"
+                      id="exampleModal"
+                      tabindex="-1"
+                      aria-labelledby="exampleModalLabel"
+                      aria-hidden="true"
+                    >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5
+                              class="modal-title titolo2"
+                              id="exampleModalLabel"
+                            >
+                              Dados do Usuário
+                            </h5>
+                            <button
+                              type="button"
+                              class="btn-close"
+                              data-bs-dismiss="modal"
+                              aria-label="Close"
+                              className="btn-outline-secondary"
+                            ></button>
+                          </div>
+                          <div class="modal-body text-dark">
+                            <Modal dados={pega} />
+                          </div>
+                          <div class="modal-footer">
+                            <button
+                              type="button"
+                              class="btn btn-outline-secondary btn-block "
+                              data-bs-dismiss="modal"
+                            >
+                              Fecha
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </th>
                   <td>
-                    <img src={r.image1} alt="Erro na img" className="img" />
+                    {r.name} {r.sobrenome}
+                  </td>
+                  <td>{r.email}</td>
+                  <td>
                     <Link
                       to="/"
                       onClick={() => {
@@ -85,7 +131,7 @@ export default function Cadastro({ products }) {
                     >
                       <i className="fas fa-edit mt-2 p-2 text-info btn btn-light card" />
                     </Link>
-                    <Link to="/" onClick={() => ApagaProduto(r._id)}>
+                    <Link to="/" onClick={() => Apagausuario(r._id)}>
                       <i className="fas fa-trash-alt mt-2 p-2 text-danger btn btn-light card" />
                     </Link>
                   </td>

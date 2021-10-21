@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Cadastro from './components/Cadastro/Cadastro'
 import Axios from 'axios'
 import { Route } from "react-router-dom";
+import './style.css'
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
    * Aqui estou usando o useState para guarda o estado, ou melhor dizendo os valores.
    * Que iremos receber da requisição via axios, para que assim eu possa usar aqui ou em outro componente via props 
    */
-  const [ product, setProduct ] = useState([])
+  const [ users, setUsers ] = useState([])
 
  /**
   * Aqui abaixo esto usando um hook do react que o useEffect para uma função asincrona
@@ -24,7 +25,7 @@ function App() {
 
       console.clear()
     
-      setProduct(res)
+      setUsers(res)
     }
 
     GetReq()
@@ -40,7 +41,7 @@ function App() {
     <>
       <div className="row">
         <div className="col-md-8 offset-md-2">
-          <Route exact path="/" component={() => <Cadastro products={product}/>} />
+          <Route exact path="/" component={() => <Cadastro users={users}/>} />
         </div>
       </div>
     </>
