@@ -36,14 +36,14 @@ function App() {
 
 
   return (
-    <AppContext.Provider value={users}>
+    <>
       <div className="row">
         <div className="col-md-8 offset-md-2">
           <Route exact path="/" component={() => <Cadastro users={users} />} />
         </div>
       </div>
       <ToastContainer />
-    </AppContext.Provider>
+    </>
   );
 }
 
