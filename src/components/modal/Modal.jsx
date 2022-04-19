@@ -2,7 +2,7 @@ import React from 'react';
 import './modal.css';
 
 const Modal = ({ dados }) => {
-  console.clear();
+
   console.log(dados);
 
   return (
@@ -10,47 +10,27 @@ const Modal = ({ dados }) => {
       <div className="container col-sm-8 bg-img1">
         <ul>
           <li>
-            <strong className="text-primary">Nome:</strong> {dados.name}
+            <img src={dados.imagem} alt="img" className="col-md-12" />
           </li>
           <li>
-            <strong className="text-primary">Sobrenome:</strong>{' '}
-            {dados.sobrenome}
+            {' '}
+            <strong className="text-primary">ID:</strong> {dados._id}
+          </li>
+          <li>
+            <strong className="text-primary">Nome:</strong> {dados.name}
           </li>
           <li>
             <strong className="text-primary">E-mail</strong> {dados.email}
           </li>
           <li>
             {' '}
-            <strong className="text-primary">CPF:</strong> {dados.cpf}
+            <strong className="text-primary">Phone:</strong> {dados.phone}
           </li>
           <li>
             {' '}
-            <strong className="text-primary">Data de Nacimento:</strong>{' '}
-            {dados.nacimento}
+            <strong className="text-primary">Password:</strong> {dados.password}
           </li>
-          <li>
-            {' '}
-            <strong className="text-primary">Telefone:</strong> {dados.phone}
-          </li>
-          <li>
-            {' '}
-            <strong className="text-primary"> CEP:</strong> {dados.cep}
-          </li>
-          <li>
-            {' '}
-            <strong className="text-primary">Endereco 1:</strong>{' '}
-            {dados.endereco1}
-          </li>
-          <li>
-            {' '}
-            <strong className="text-primary">Endereco 2</strong>{' '}
-            {dados.endereco2}
-          </li>
-          <li>
-            {' '}
-            <strong className="text-primary">Renda Mensal:</strong> R$
-            {dados.rendaMes}
-          </li>
+
         </ul>
       </div>
     </>

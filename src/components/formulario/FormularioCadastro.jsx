@@ -1,27 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import api from '../../api/api';
+import { toast } from 'react-toastify';
 
 /**
  * Essa variável é quem determina os valores iniciais dos input citado no values do useState
  */
 const camposIniciasDeValores = {
   name: '',
-  sobrenome: '',
+  imagem: '',
   email: '',
   password: '',
-  phone: '',
-  cep: '',
-  endereco1: '',
-  endereco2: '',
-  nacimento: '',
-  cpf: '',
-  rendMensal: '',
+  phone: ''
 };
 
 export default function FormularioCadastro(props) {
   const [values, setValues] = useState(camposIniciasDeValores);
   const history = useHistory();
+
+  const URL = "http://localhost:3001/"
 
   /**
    * Aqui estamos utilizando o onChange para verifica tudo que esta sendo digitado
@@ -40,8 +37,8 @@ export default function FormularioCadastro(props) {
    */
   useEffect(() => {
     if (props.idAtual) {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}admin/${props.idAtual}`)
+      api
+        .get(`/admin/${props.idAtual}`)
         .then((res) => {
           setValues(res.data);
         });
@@ -64,205 +61,125 @@ export default function FormularioCadastro(props) {
      */
     const method = props.idAtual ? 'put' : 'post';
     const url = props.idAtual
-      ? `${process.env.REACT_APP_API_URL}${props.idAtual}`
-      : `${process.env.REACT_APP_API_URL}`;
+      ? `${URL}${props.idAtual}`
+      : `${URL}`;
 
     /**
      * E o que for resolvido na condição de cima vai ser executado aqui.
      * Seja para criar um produto ou para atualizar
      */
-    axios[method](url, values)
-      .then((res) => {
+    api[method](url, values)
+      .then(() => {
         if (props.idAtual === '') {
-          alert('O produto foi Criado com sucesso');
+          toast.success('O produto foi Criado com sucesso');
         } else {
-          alert('O produto foi Atualizado com sucesso');
-        }
-        history.push('/', window.location.reload());
-      })
-      .catch((erro) => {
-        alert(
-          'Houve um erro ao tenta criar esse usuario, erro relacionado a ' +
-            erro
-        );
+          toast.success('O produto foi Atualizado com sucesso');
 
-        history.push('/', window.location.reload());
+        }
+        history.push('/');
+        setTimeout(() => {
+          window.location.reload()
+        }, 6250)
+      })
+      .catch((err) => {
+        toast.error('Houve um erro ao tenta a ação ' + err);
+        history.push('/');
+        setTimeout(() => {
+          window.location.reload()
+        }, 6250)
+
       });
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-id-badge p-1 mt-2 text-info" />
+    <>
+      <h2 className="titolo mx-auto">Crie ou Atualize user</h2>
+      <form onSubmit={onSubmit}>
+        <div className="form-group input-group">
+          <div className="input-grou-prepend align-self-center">
+            <div className="input-group-text">
+              <i className="fas fa-id-badge p-1 mt-2 text-info" />
+            </div>
           </div>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Seu Nome"
+            name="name"
+            value={values.name}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group input-group">
+          <div className="input-grou-prepend align-self-center">
+            <div className="input-group-text">
+              <i className="fas fa-envelope  p-1 mt-2 text-info" />
+            </div>
+          </div>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Sua Imagem"
+            name="imagem"
+            value={values.imagem}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group input-group">
+          <div className="input-grou-prepend align-self-center">
+            <div className="input-group-text">
+              <i className="fas fa-envelope  p-1 mt-2 text-info" />
+            </div>
+          </div>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Senha"
+            name="email"
+            value={values.email}
+            onChange={onChange}
+          />
+        </div>
+        <div className="form-group input-group">
+          <div className="input-grou-prepend align-self-center">
+            <div className="input-group-text">
+              <i className="fas fa-phone-alt  p-1 mt-2 text-info" />
+            </div>
+          </div>
+          <input
+            type="password"
+            className="form-control"
+            placeholder="Telefone"
+            min="0"
+            name="password"
+            value={values.password}
+            onChange={onChange}
+          />
+
+        </div>
+        <div className="form-group input-group">
+          <div className="input-grou-prepend align-self-center">
+            <div className="input-group-text">
+              <i className="fas fa-phone-alt  p-1 mt-2 text-info" />
+            </div>
+          </div>
+          <input
+            type="phone"
+            className="form-control"
+            placeholder="Telefone"
+            min="0"
+            name="phone"
+            value={values.phone}
+            onChange={onChange}
+          />
+
         </div>
         <input
-          type="text"
-          className="form-control"
-          placeholder="Seu Nome"
-          name="name"
-          value={values.name}
-          onChange={onChange}
+          type="submit"
+          value={props.idAtual === '' ? 'Salvar' : 'Atualizar'}
+          className="btn btn-primary btn-block mb-5"
         />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-id-badge p-1 mt-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Sobrenome"
-          name="sobrenome"
-          value={values.sobrenome}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-envelope  p-1 mt-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="E-mail"
-          name="email"
-          value={values.email}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-envelope  p-1 mt-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Senha"
-          name="password"
-          value={values.password}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-phone-alt  p-1 mt-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Telefone"
-          min="0"
-          name="phone"
-          value={values.phone}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-shipping-fast p-1 mt-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="CEP"
-          name="cep"
-          value={values.cep}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-shipping-fast p-1 mt-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Endereco1"
-          name="endereco1"
-          value={values.endereco1}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-shipping-fast p-1 mt-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Endereco2"
-          name="endereco2"
-          value={values.endereco2}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-calendar p-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Idade ex: 01/01/2000"
-          name="nacimento"
-          value={values.nacimento}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fa-file-signature  p-1 mt-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="CPF"
-          name="cpf"
-          value={values.cpf}
-          onChange={onChange}
-        />
-      </div>
-      <div className="form-group input-group">
-        <div className="input-grou-prepend align-self-center">
-          <div className="input-group-text">
-            <i className="fas fas fa-wallet p-2 text-info" />
-          </div>
-        </div>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Renda mensal"
-          name="rendaMes"
-          value={values.rendaMes}
-          onChange={onChange}
-        />
-      </div>
-      <input
-        type="submit"
-        value={props.idAtual === '' ? 'Salvar' : 'Atualizar'}
-        className="btn btn-primary btn-block mb-5"
-      />
-    </form>
+      </form>
+    </>
   );
 }

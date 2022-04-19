@@ -4,8 +4,12 @@ import './cadastro.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Modal from '../modal/Modal';
+import { toast } from 'react-toastify';
 
 export default function Cadastro({ users }) {
+
+  const URL = "http://localhost:3001/"
+
   /**
    * Esse hook useState esta recebendo o valor do evento onClick e assim
    * passo como parâmetro para o componente FormularioCadastro para que assim
@@ -21,17 +25,21 @@ export default function Cadastro({ users }) {
    */
   const Apagausuario = (id) => {
     axios //Esse process.env.REACT_APP_API_URL é uma variave de ambiente que contem a url da api
-      .delete(process.env.REACT_APP_API_URL + id)
+      .delete(URL + id)
       .then((res) => {
-        alert('O usuário foi deletado com sucesso');
-        window.location.reload();
+        toast.success('O usuário foi deletado com sucesso');
+        setTimeout(() => {
+          window.location.reload()
+        }, 6280)
       })
       .catch((erro) => {
-        alert(
+        toast.error(
           'Houve um erro ao tenta apaga esse usuário, erro relacionado a ' +
-            erro
+          erro
         );
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload()
+        }, 6280)
       });
   };
 
@@ -49,7 +57,7 @@ export default function Cadastro({ users }) {
           <FormularioCadastro {...{ idAtual, users }} />
         </div>
         <div className="col-md-7 ">
-          <h2 className="titolo mx-auto">Lista de Usuários</h2>
+          <h2 className="titolo mx-auto">Lista de Usuários na database</h2>
           <table class="table">
             <thead>
               <tr className="text-white">
@@ -118,7 +126,7 @@ export default function Cadastro({ users }) {
                     </div>
                   </th>
                   <td>
-                    {r.name} {r.sobrenome}
+                    {r.name}
                   </td>
                   <td>{r.email}</td>
                   <td>
