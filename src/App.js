@@ -6,7 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css'
 import './style.css'
 //import AdminRouter from './Routes/routes';
-import { AppContext } from './Context/SatateDate';
+//import { AppContext } from './Context/SatateDate';
 
 function App() {
 
