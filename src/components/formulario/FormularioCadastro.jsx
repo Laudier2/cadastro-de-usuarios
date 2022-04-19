@@ -83,7 +83,7 @@ export default function FormularioCadastro(props) {
         }, 6250)
       })
       .catch((err) => {
-        toast.error('Houve um erro ao tenta a ação ' + err);
+        toast.error('Os campos sao obrigatorio ou usuario email ja cadastrado, tente novamente');
         history.push('/');
         setTimeout(() => {
           window.location.reload()
