@@ -76,6 +76,7 @@ export default function FormularioCadastro(props) {
           toast.success('O produto foi Atualizado com sucesso');
 
         }
+        //Correção de eero
         history.push('/');
         setTimeout(() => {
           window.location.reload()
